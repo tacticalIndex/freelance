@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman</title>
+</head>
+<body>
+    <h1>Hangman</h1>
+    <script>
+        var words = [
+            "icode",
+            "money",
+            "computer",
+            "technology",
+            "economy"
+        ];
+        var word = words[Math.floor(Math.random() * words.length)];
+        var answer = [];
+        for (var i = 0; i < word.length; i++) {
+            answer[i] = "_";
+        }
+        var remaining = word.length;
+        while (remaining > 0) {
+            alert(answer.join(" "));
+            var guess = prompt("Guess a letter");
+            if (guess == null) {
+                break;
+            } else if (guess.length !== 1) {
+                alert("Enter only one letter");
+                continue;
+            } else {
+                guess = guess.toLowerCase();
+                for (var j = 0; j < word.length; j++) {
+                    if (word[j] === guess && answer[j] === "_") {
+                        answer[j] = guess;
+                        remaining--;
+                    }
+                }
+            }
+        }
+        alert(answer.join(" "));
+        alert("You won, the answer was " + word);
+    </script>
+</body>
+</html>
