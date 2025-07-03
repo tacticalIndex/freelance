@@ -48,7 +48,7 @@ def execute_action():
         if Bottomdec2 == 1:
             # Checking if the refresh command is in the line
             if "ref" in line:
-                time.sleep(3)
+                time.sleep(2)
 
         # Short pause between lines
         time.sleep(speed)
