@@ -22,7 +22,7 @@ def execute_action():
 
     # read and process text from box
     text = textbox.get("1.0", tk.END)
-    speed = float(speedbox.get("1.0", "end-1c")) if speedbox.get("1.0", "end-1c") else 1
+    speed = float(speedbox.get("1.0", "end-1c")) if speedbox.get("1.0", "end-1c") else .85
     lines = text.strip().split("\n")
     print(lines)
 
@@ -33,6 +33,7 @@ def execute_action():
 
     for line in lines:
         line = line.replace(":", "")
+
         # Opening command Bar
         pydirectinput.press("'")
 
@@ -48,7 +49,7 @@ def execute_action():
         if Bottomdec2 == 1:
             # Checking if the refresh command is in the line
             if "ref" in line:
-                time.sleep(2)
+                time.sleep(3)
 
         # Short pause between lines
         time.sleep(speed)
