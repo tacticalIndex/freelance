@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 import pyautogui
 import pyperclip
 import keyboard
@@ -61,27 +62,43 @@ def execute_action():
 # Create main window
 root = tk.Tk()
 root.title("Auto Morpher")
-root.geometry("400x400")
+root.geometry("450x500")
+root.configure(bg="#f0f0f0")
 
-# Add textbox
-textbox = tk.Text(root, height=10, width=40)
-textbox.pack(pady=20)
+# Use ttk for modern styling
+style = ttk.Style()
+style.theme_use("clam")
+style.configure("TButton", font=("Segoe UI", 10), padding=6)
+style.configure("TCheckbutton", font=("Segoe UI", 10))
+style.configure("TLabel", font=("Segoe UI", 10))
 
-# Add speed box
-speedbox = tk.Text(root, height=1, width=5)
-speedbox.pack(pady=5)
+# Frame for layout
+frame = ttk.Frame(root, padding=20)
+frame.pack(expand=True, fill="both")
 
-# Add button
-execute_button = tk.Button(root, text="Execute", command=execute_action)
-execute_button.pack(pady=5)
+# Add textbox label and box
+ttk.Label(frame, text="Input Text:").pack(anchor="w", pady=(0, 5))
+textbox = tk.Text(frame, height=10, width=50, font=("Consolas", 10))
+textbox.pack(pady=(0, 15))
+
+# Speed label and entry
+ttk.Label(frame, text="Delay between lines (seconds):").pack(anchor="w")
+speedbox = tk.Text(frame, height=1, width=10, font=("Segoe UI", 10))
+speedbox.pack(pady=(0, 15))
 
 # Add checkbox, optional functionality
 var2 = tk.IntVar()
-c2 = tk.Checkbutton(root, text='Enable Refresh wait.', variable=var2, onvalue=1, offvalue=0)
-c2.pack(pady=5)
+c2 = ttk.Checkbutton(frame, text='Enable Refresh Wait', variable=var2, onvalue=1, offvalue=0)
+c2.pack(pady=(0, 15))
 
-#Add Countdown Label
-countdown_label = tk.Text(root)
+# Add button
+execute_button = ttk.Button(frame, text="Execute", command=execute_action)
+execute_button.pack(pady=(0, 20))
 
-# Opens Window
+# Add Countdown Label
+ttk.Label(frame, text="Status:").pack(anchor="w")
+countdown_label = tk.Text(frame, height=4, width=50, font=("Segoe UI", 9), bg="#e6e6e6")
+countdown_label.pack()
+
+# Open window
 root.mainloop()
