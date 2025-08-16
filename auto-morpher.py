@@ -13,7 +13,7 @@ import pydirectinput
 def execute_action():
     # 3-second countdown
     for i in range(3, 0, -1):
-        countdown_label.insert('1.0', "Starting in {i} seconds...")
+        countdown_label.insert('1.0', f"Starting in {i} seconds...")
         root.update()
         time.sleep(1)
 
