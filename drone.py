@@ -24,4 +24,6 @@ while(True):
             mydrone.down(50)
         case "quit":
             mydrone.land()
+        case "battery":
+            mydrone.get_battery()
             break
