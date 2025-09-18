@@ -16,12 +16,13 @@ local webhookProxyURL = "PROXY URL HERE" -- see javascript code for proxy websit
 
 local killers = {}
 local victims = {}
+local timestamps = {}
 
 local function sendMessage(url)
     local messageFormat = ""
 
     for i = 1, #killers do
-        messageFormat = messageFormat .. "**" .. killers[i] .. "** killed **" .. victims[i] .. "**."
+        messageFormat = messageFormat .. "**" .. killers[i] .. "** killed **" .. victims[i] .. "** at <t:" .. timestamps[i] .. ":T> (HH:MM:SS)."
         if i < #killers then
             messageFormat = messageFormat .. "\\n"
         end
@@ -37,16 +38,18 @@ local function sendMessage(url)
     -- Clear arrays after sending
     killers = {}
     victims = {}
+    timestamps = {}
 end
 
 event("kill", function(data)
     local playerKiller = data.Value[1]
     local playerVictim = data.Value[2]
+    local timeOfKill = os.time()
 
     table.insert(killers, playerKiller)
     table.insert(victims, playerVictim)
 
-    if #killers >= 4 then
+    if #killers >= 5 then
         sendMessage(webhookProxyURL)
     end
 end)
