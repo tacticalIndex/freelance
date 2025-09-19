@@ -12,7 +12,7 @@ number of functions/requests you can use. If you do have a limit, maybe change
 the code up a bit to avoid reaching it too fast (e.g. mine was 125k a month)
 ]]
 
-local webhookProxyURL = "PROXY URL HERE" -- see javascript code for proxy website
+local webhookProxyURL = "https://area-55.netlify.app/.netlify/functions/killlogsproxy" -- see javascript code for proxy website
 
 local killers = {}
 local victims = {}
