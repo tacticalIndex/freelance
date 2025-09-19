@@ -35,7 +35,7 @@ event("chatted",function(data)
     -- SETTINGS: ADJUST AS NEEDED
     
     ttsHandler.Volume = 10
-    ttsHandler.VoiceId = "1" -- currently "British male" (https://create.roblox.com/docs/audio/objects#text-to-speech) 
+    ttsHandler.VoiceId = "5" -- currently "British male" (https://create.roblox.com/docs/audio/objects#text-to-speech) 
     
     -- Play TTS
     ttsHandler.Text = playerMessage
