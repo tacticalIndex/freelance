@@ -21,7 +21,7 @@ f(particlePart) -- parents it to the map (game.Workspace)
 
 -- step 2: add a particle emitter to that part
 local particleEmitter = Instance.new("ParticleEmitter") -- creates a new ParticleEmitter
-particleEmitter.Texture = "rbxassetid://1266170131" -- replace with your desired texture id, for now its just some id i got from roblox's documentation (white rings)
+particleEmitter.Texture = "rbxassetid://8508980536" -- replace with your desired texture id, for now its just some id i got from roblox's documentation (white rings)
 particleEmitter.Rate = 10 -- number of particles emitted per second
 particleEmitter.Lifetime = NumberRange.new(2, 5) -- how long particles live for (min, max)
 -- Number of particles = Rate * Lifetime. Don't crash the server.
