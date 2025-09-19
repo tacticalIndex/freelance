@@ -19,12 +19,13 @@ local webhookProxyURL = "PROXY URL HERE" -- see javascript code for proxy websit
 
 local usernames = {}
 local messages = {}
+local timestamps = {}
 
 local function sendMessage(url)
     local messageFormat = ""
 
     for i = 1, #usernames do
-        messageFormat = messageFormat .. "**" .. usernames[i] .. ":** " .. messages[i]
+        messageFormat = messageFormat .. "**" .. usernames[i] .. ":** " .. messages[i] .. "<:t" .. timestamps[i] .. ":T> `[HH:MM:SS]`"
         if i < #usernames then
             messageFormat = messageFormat .. "\\n"
         end
@@ -40,6 +41,7 @@ local function sendMessage(url)
     -- Clear arrays after sending
     usernames = {}
     messages = {}
+	timestamps = {}
 end
 
 -- Function to sanitize chat messages
@@ -63,11 +65,13 @@ end
 event("chatted", function(data)
     local player = data.Value[1]
     local playertext = data.Value[2]
+	local timeOfChat = os.time() 
 
     table.insert(usernames, player)
     table.insert(messages, sanitizeMessage(playertext))
+	table.insert(timestamps, timeOfChat)
 
-    if #usernames >= 8 then
+    if #usernames >= 10 then
         sendMessage(webhookProxyURL)
     end
 end)
