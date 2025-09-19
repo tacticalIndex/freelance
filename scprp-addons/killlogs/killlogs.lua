@@ -48,6 +48,7 @@ event("kill", function(data)
 
     table.insert(killers, playerKiller)
     table.insert(victims, playerVictim)
+    table.insert(timestamps, timeOfKill)
 
     if #killers >= 5 then
         sendMessage(webhookProxyURL)
