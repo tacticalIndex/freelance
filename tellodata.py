@@ -4,43 +4,28 @@ import time
 # Initialize the drone
 my_drone = tello.Tello()
 
-# Define 4 points (in cm, relative to takeoff position)
+# Define 4 points (in cm, relative to takeoff position, assuming z=50cm altitude)
 points = [
-    (0, 0),      # Point 1: start
-    (100, 0),    # Point 2: 1 meter forward
-    (100, 100),  # Point 3: 1 meter right
-    (0, 100)     # Point 4: back to Y axis
+    (0, 0, 50),      # Point 1: start
+    (100, 0, 50),    # Point 2: 1 meter forward
+    (100, 100, 50),  # Point 3: 1 meter right
+    (0, 100, 50)     # Point 4: back to Y axis
 ]
 
 results = []
 
-# Takeoff
 my_drone.takeoff()
 time.sleep(5)
 
-for i, (x, y) in enumerate(points):
-    # Move to the next point
-    if i > 0:
-        dx = points[i][0] - points[i-1][0]
-        dy = points[i][1] - points[i-1][1]
-        if dx != 0:
-            if dx > 0:
-                my_drone.move_forward(dx)
-            else:
-                my_drone.move_back(-dx)
-        if dy != 0:
-            if dy > 0:
-                my_drone.move_right(dy)
-            else:
-                my_drone.move_left(-dy)
-        time.sleep(2)
-    
-    # Collect sensor data
+for i, (x, y, z) in enumerate(points):
+    my_drone.go(x, y, z, 20)  # speed set to 20cm/s; adjust as needed
+    time.sleep(5)  # wait to reach point
+
     baro = my_drone.get_baro()
     battery = my_drone.get_battery()
     temp = my_drone.get_temp()
     results.append({
-        'point': (x, y),
+        'point': (x, y, z),
         'baro': baro,
         'battery': battery,
         'temp': temp
@@ -48,7 +33,6 @@ for i, (x, y) in enumerate(points):
     print(f'Point {i+1}: Baro={baro}, Battery={battery}, Temp={temp}')
     time.sleep(1)
 
-# Land
 my_drone.land()
 
 # Write results to a TXT file
