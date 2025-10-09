@@ -39,7 +39,7 @@ event("lightswitch", function(data)
     local messageFormat = "**" .. player .. "** turned " .. room .. "'s lights " .. state .. "."
 
     http(webhookProxyURL, "post",
-        { ["Content-Type"] = "application/json },
+        { ["Content-Type"] = "application/json" },
         "{\"content\": \"" .. messageFormat .. "\"}"
     )
 end)
