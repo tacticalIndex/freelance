@@ -31,6 +31,19 @@ event("interaction", function(data)
     )
 end)
 
+event("lightswitch", function(data)
+    local player = data.Value[1]
+    local room = data.Value[2]
+    local state = data.Value[3]
+
+    local messageFormat = "**" .. player .. "** turned " .. room .. "'s lights " .. state .. "."
+
+    http(webhookProxyURL, "post",
+        { ["Content-Type"] = "application/json },
+        "{\"content\": \"" .. messageFormat .. "\"}"
+    )
+end)
+
 --[[
 End of script. Related resources and documentation can be found below:
 - https://create.roblox.com/docs
