@@ -8,7 +8,6 @@ def account_join():
     serverid = request.args.get("serverid")
     headers = request.headers
     authorization = headers.get('Authorization')
-    setup = False
 
     if authorization is None:
         return "Authorization Header is not found.", 401
@@ -23,20 +22,20 @@ def account_join():
 
         
         payload = {
-            "readyForExecution": true,
+            "readyForExecution": True,
             "message": "i55 ready for service 👽"
         }
         return jsonify(payload), 200
     elif serverid is None:
         payload = {
-            "readyForExecution": false,
+            "readyForExecution": False,
             "message": "i55 not ready for service 🥀",
             "errorMessage": "Argument: `serverid` was missing from the request."
         }
         return jsonify(payload), 400
     elif authorization != process.env.accountjoinheader:
         payload = {
-            "readyForExecution": false,
+            "readyForExecution": False,
             "message": "i55 not ready for service 🥀",
             "errorMessage": "Authorization header is not valid.
         }
